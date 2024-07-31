@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import MoreBtn from '../components/button/arrow-button.astro';
+import ImageLoader from "../components/Loader/ImageLoader.astro";
+import {postQueryProperty} from "../libs/Notion/NotionApi";
+---
+
+<Layout title="トップページ" description="ロクの技術録のトップページです。良かったら見て言ってね♪" page="Home" css="mx-2 space-y-5 mx-auto w-[90%] lg:w-[70%] pt-8">
+
+	<ImageLoader imagePath="header.png" altText="ヘッダー画像(今やりたいことをやる 技術ブログ)"
+				 css="bg-white mb-5 rounded-2xl shadow-2xl border-2 sm:rounded-2xl sm:mx-auto sm:p-2 xl:mx-auto xl:mb-10"/>
+
+	<div class="pb-16 sm:rounded-2xl sm:m-auto sm:mt-4 sm:mb-10 sm:p-4 xl:w-full xl:m-0 ">
+		<div class="p-5 w-[90%] xl:w-[70%] mb-8 mx-auto bg-white bg-opacity-70 rounded-2xl shadow-lg">
+			<div class="py-2 pl-4 text-2xl md:text-4xl font-bold sm:mb-4 border-l-8 border-yellow-200">新着記事</div>
+			<Card prop={postQueryProperty.All} limit={3}/>
+			<MoreBtn url="/blog"/>
+		</div>
+
+		<!--<div class="">-->
+		<!--	<div class="py-2 pl-4 text-4xl font-bold sm:mb-4 border-l-8 border-yellow-200">更新情報</div>-->
+		<!--	<News/>-->
+		<!--	&lt;!&ndash;<MoreBtn url="/content/updatedAt"/>&ndash;&gt;-->
+		<!--</div>-->
+	</div>
+
+</Layout>
+
+<style>
+
+</style>

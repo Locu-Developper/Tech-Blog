@@ -1,0 +1,31 @@
+---
+const { page } = Astro.props;
+const pageName = [
+    'Home',
+    // 'YouTube Ch',
+    'Blog',
+    'About',
+    'Contact'
+]
+const pageUrl = [
+    '/',
+    '/blog',
+    '/about',
+    '/contact/',
+]
+
+let pageStyle:string[] = [];
+
+for(let i= 0; i < pageName.length; i++){
+    pageStyle.push('font-medium ' + (page == pageName[i] ? 'text-blue-500' : 'text-gray-600 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500'));
+}
+---
+
+<a class={pageStyle[0]} href={pageUrl[0]} aria-current="page">
+    <p class="text-xl border-b-2 border-gray-500 sm:border-none pb-2 xl:pb-0">{pageName[0]}</p></a>
+<a class={pageStyle[1]} href={pageUrl[1]}>
+    <p class="text-xl border-b-2 border-gray-500 sm:border-none pb-2 xl:pb-0">{pageName[1]}</p></a>
+<a class={pageStyle[2]} href={pageUrl[2]}>
+    <p class="text-xl border-b-2 border-gray-500 sm:border-none pb-2 xl:pb-0">{pageName[2]}</p></a>
+<!--<a class={pageStyle[3]} href={pageUrl[3]}>-->
+<!--    <p class="text-xl border-b-2 border-gray-500 sm:border-none pb-2 xl:pb-0">{pageName[3]}</p></a>-->

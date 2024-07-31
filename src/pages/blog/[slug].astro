@@ -1,0 +1,140 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SnsLink from "../../components/SnsLink.astro";
+import {marked} from "marked";
+import {getPage} from "../../libs/Notion/NotionApi";
+import {IPageProperty} from "../../libs/Notion/PageProperty";
+import {iconJudge} from "../../libs/Notion/IconJudge";
+
+interface Props {
+    property: IPageProperty;
+    content: string;
+}
+
+export const getStaticPaths = async () => {
+    const post = await getPage();
+    if(post.length === 0) {console.error("コンテンツが不正です")}
+
+    return post.map((article) => ({
+        params: {slug: article.property.slug},
+        props: {property: article.property, content: article.content}
+    }))
+}
+
+
+
+const {property,content} = Astro.props;
+const tags = property.tags;
+
+let title = property.title;
+let updatedDate = new Date(property.updatedAt).toLocaleDateString('sv-SE');
+let createdDate = new Date(property.createdAt).toLocaleDateString('sv-SE');
+
+/*
+　|￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
+　|
+　|
+　|  なにみてんだコラ
+　|  (フォントが違うからずれるなぁ)
+　|
+　|＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+　 ＿＿_∧∧　 ／
+／＼ 　(,,ﾟДﾟ)つ
+＼／|￣∪￣￣|＼
+　 ＼|花見弁当|
+　 　　￣￣￣￣
+*/
+---
+
+
+
+<Layout title={title} description="詳細ページです" css="xl:mb-10 w-[95%] lg:w-4/5">
+
+    <style>
+        .border-anime {
+            background-image: linear-gradient(120deg, #84fab0 0%, #ABBDF9 60%, #E2C1EB 80%, #8fd3f4 100%);
+            background-size: 200%;
+            animation: border-gradient 20s infinite;
+            //width: 100%;
+            height: 5px;
+        }
+
+        @keyframes border-gradient {
+            0% {
+                background-position: 0 40%;
+            }
+            50% {
+                background-position: 100% 60%;
+            }
+            100% {
+                background-position: 0 40%;
+            }
+        }
+
+    </style>
+
+    <div class="prose bg-white p-4 rounded-2xl shadow-2xl mx-auto max-w-full lg:w-2/3">
+        <article class="pb-20">
+            <!-- ヘッダー -->
+            <section class="px-5">
+                <div class="text-center"><span set:html={iconJudge(property.icon, 1)}></span></div>
+                <div class="hidden md:block text-center">
+                    <h1 class="mb-3">{title}</h1>
+                </div>
+                <div class="md:hidden text-center font-bold">
+                    <span class="text-3xl mb-3">{title}</span>
+                </div>
+                <div class="border-anime rounded-full"></div>
+                <!--<img src={article.image} alt={article.description} class="w-[80%] m-auto rounded-2xl shadow-2xl"/>-->
+                <section class="flex justify-end mx-4 my-2 space-x-5">
+                    <time datetime={createdDate}>
+                        <i class="fa-solid fa-pencil"></i>
+                        {createdDate}
+                    </time>
+                    <time datetime={updatedDate}>
+                        <i class="fa-solid fa-rotate"></i>
+                        {updatedDate}
+                    </time>
+                </section>
+                <div class="flex space-x-2 mb-3">
+                    <i class="fa-solid fa-list fa-lg content-center"></i>
+                    <div class="h-fit">
+                        <a href=`/blog/category/${property.category.name}`
+                           class="border border-blue-500 text-sm px-3 py-0.5 no-underline rounded-md">
+                            {property.category.name}
+                        </a>
+                    </div>
+                </div>
+                <div class="flex space-x-2">
+                    <i class="fa-solid fa-tag fa-lg content-center"></i>
+                    <div class="flex h-fit space-x-1.5">
+                        {
+                            tags.map((tag) => {
+                                return (
+                                        <a href=`/blog/tags/${tag.name}`
+                                           class="border border-blue-500 text-sm px-3 py-0.5 no-underline rounded-md">
+                                            {tag.name}
+                                        </a>
+                                );
+                            })
+                        }
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- メイン -->
+            <section>
+                <article set:html={ marked(content) } class="p-5"/>
+            </section>
+
+            <!-- フッター(SNS・関連記事) -->
+            <section>
+                <SnsLink/>
+            </section>
+
+        </article>
+    </div>
+
+</Layout>
+

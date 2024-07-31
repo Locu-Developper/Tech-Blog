@@ -1,0 +1,26 @@
+---
+
+import Layout from "../layouts/Layout.astro";
+
+---
+
+
+<Layout title="仮Home" description="ロクの技術録のトップページです。良かったら見て言ってね♪" page="Home" css="space-y-5">
+    <!--<ImageLoader imagePath="header.png" altText="ヘッダ画像" css="rounded-2xl"/>-->
+
+    <section class="prose max-w-full">
+        <a href="" class="transition flex py-2 no-underline border-2 border-black rounded-2xl shadow-xl relative focus:shadow-none">
+            <div class="w-[10%] text-center my-auto">
+                <i class="fa-brands fa-rust fa-3x"></i>
+            </div>
+            <div class="flex flex-col">
+                <span class="text-sm text-gray-400">2024/10/31</span>
+                <span class="text-3xl font-bold">RUSTでPOST送信した</span>
+                <span class="">tag</span>
+            </div>
+            <div class=" absolute right-10 top-1/2 -translate-y-1/2">
+                <i class="fa-solid fa-chevron-right fa-xl"></i>
+            </div>
+        </a>
+    </section>
+</Layout>

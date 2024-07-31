@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+import {postQueryProperty} from "../libs/Notion/NotionApi";
+import {noMoreMessage} from "../libs/cmn";
+
+// (o・ω・n）＜ もうないんだオン
+---
+
+<Layout title="ブログ" description="やったことを300-500文字程度の記事の一覧ページだよ" page="Blog" css="w-[70%] lg:w-[60%] pt-8 m-auto xl:mb-10" >
+    <div class="text-3xl sm:text-5xl text-center font-bold ">記事一覧</div>
+    <div class="border rounded-2xl border-black w-[40%] m-auto mb-10 mt-2 sm:mt-4 "></div>
+    <Card prop={postQueryProperty.All}/>
+    <div class="text-center text-gray-400 mt-5">
+        {noMoreMessage}
+    </div>
+</Layout>

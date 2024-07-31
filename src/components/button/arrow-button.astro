@@ -1,0 +1,19 @@
+---
+interface Props {
+    url: string
+}
+
+const {url} = Astro.props;
+
+---
+<div class="border-2 border-black mt-3 w-2/5 p-3 group m-auto sm:my-7">
+    <a class="" href={url}>
+        <div class="flex items-center justify-center">
+            <div class="font-bold">More</div>
+            <div class="hidden group-hover:block group-focus:block text-md pl-4">
+                <i class="fa-solid fa-arrow-right"></i>
+            </div>
+        </div>
+    </a>
+</div>
+

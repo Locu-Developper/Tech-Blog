@@ -1,0 +1,77 @@
+---
+import {getPostProperty} from "../libs/Notion/NotionApi";
+import {PageProperty} from "../libs/Notion/PageProperty";
+import {iconJudge} from "../libs/Notion/IconJudge";
+
+interface Props {
+    prop: string;
+    propV?: string;
+    limit?: number;
+}
+
+const {prop, propV = '', limit = 0} = Astro.props;
+
+
+let posts = await getPostProperty(prop, propV);
+
+if(limit !== 0){
+    console.log(posts)
+    posts = posts.slice(0,limit);
+    console.log(posts)
+}
+
+---
+
+<section class="prose max-w-full" id="list">
+    {posts.map((post:PageProperty) => {
+
+        const created = new Date(post.createdAt);
+        let icon = post.icon;
+
+        return(
+                <a  href={`/blog/${post.slug}`}
+                    class="bg-white my-2 p-2 md:mb-5 flex md:py-2 no-underline border-2 border-black md:rounded-2xl shadow-xl relative md:focus:shadow-none"
+                    data-time={created.toLocaleDateString()}>
+                    <div class="hidden md:block w-[10%] text-center my-auto hover:animate-spin">
+                        <span set:html={iconJudge(icon, 0)}></span>
+                    </div>
+                    <div class="flex flex-col">
+
+                        <time class="text-sm text-gray-400" datetime={created.toLocaleDateString()}>
+                            {created.toLocaleDateString()}
+                            <span id="isNew" data-date={created}/>
+                        </time>
+                        <div class="md:text-2xl font-bold pt-2 h-fit">{post.title}</div>
+                        <div>
+                            {
+                                post.tags.map( tag =>
+                                    <span class="text-[70%] border border-black mr-0.5 text-center px-2 rounded-md md:w-fit">{tag.name}</span>
+                                )
+                            }
+                        </div>
+                    </div>
+                    <div class="hidden md:block absolute right-10 top-1/2 -translate-y-1/2">
+                        <i class="fa-solid fa-chevron-right fa-xl"></i>
+                    </div>
+                </a>
+
+        )
+    })}
+    <script client:load>
+        const list = document.getElementById('list');
+        const now = new Date();
+
+        for(const child of list.children){
+            const element = child.getElementsByTagName('time')[0];
+            if(element === undefined){continue;}
+            const doc = element.firstElementChild;
+            doc.insertAdjacentHTML('afterbegin',
+                Math.floor(
+                    (now.valueOf() - new Date(doc.dataset.date).valueOf()) / 86400000) <= 3 ?
+                        '<span class="text-red-600 font-bold pl-2">new</span>' : ''
+            )
+        }
+    </script>
+</section>
+
+

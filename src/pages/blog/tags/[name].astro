@@ -1,0 +1,40 @@
+
+---
+import {getPostProperty, postQueryProperty} from "../../../libs/Notion/NotionApi";
+import {IPageProperty} from "../../../libs/Notion/PageProperty";
+import Layout from "../../../layouts/Layout.astro";
+import Card from "../../../components/Card.astro";
+import {noMoreMessage} from "../../../libs/cmn";
+
+export const getStaticPaths = async () => {
+    const post = await getPostProperty(postQueryProperty.All);
+    if(post.length === 0) {console.error("コンテンツが不正です")}
+
+    let tagSet = new Set();
+    post.map((p: IPageProperty) => {
+        p.tags.map(t =>
+            tagSet.add(t.name)
+        )
+    });
+    const tags = Array.from(tagSet);
+
+
+    return tags.map((t) => ({
+        params: {name: t}
+    }))
+}
+
+const name = Astro.params['name'] ?? '';
+---
+
+<Layout title="ブログ" description=`やったことを300-500文字程度の${name}ページだよ` page="Blog" css="w-[90%] md:w-1/2 pt-8 m-auto xl:mb-10">
+    <div class="text-3xl sm:text-5xl text-center font-bold ">
+        <span class="text-xl text-gray-600">タグ</span><br/>
+        {name}
+    </div>
+    <div class="border rounded-2xl border-black w-[40%] m-auto mb-10 mt-2 sm:mt-4 "></div>
+    <Card prop={postQueryProperty.Tag} propV={name}/>
+    <div class="text-center text-gray-400 mt-5">
+        {noMoreMessage}
+    </div>
+</Layout>

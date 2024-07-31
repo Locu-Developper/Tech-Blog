@@ -1,0 +1,37 @@
+---
+import MenuList from "./MenuList.astro";
+import ImageLoader from "../Loader/ImageLoader.astro";
+
+interface Props{
+    currPage :string;
+    css: string;
+}
+
+const { currPage, css = "" } = Astro.props;
+---
+
+
+<header class=`mb-5 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm dark:bg-neutral-800 pt-2 md:pt-4 sticky top-0 shadow-2xl shadow-orange-100 z-50 ${css}`>
+    <nav class="max-w-[85rem] w-full mx-auto px-10 sm:flex sm:items-end sm:justify-between" aria-label="Global">
+        <div class="flex items-center justify-between">
+            <a class="flex-none w-1/5 items-center" href="/">
+                <ImageLoader imagePath="temp-logo.png" altText="Logo" css=""/>
+            </a>
+            <div class="sm:hidden">
+                <button type="button" class="group border-none hs-collapse-toggle p-2 inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-neutral-700 dark:text-white dark:hover:bg-white/10" data-hs-collapse="#navbar-image-1" aria-controls="navbar-image-1" aria-label="Toggle navigation">
+                    <svg width="40" height="40" viewBox="0 0 448 384" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="stroke-black " stroke-linecap="round" stroke-width="64">
+                        <line x1="32" y1="32" x2="416" y2="32" class="transition duration-75 origin-center group-active:translate-y-40"/>
+                        <line x1="32" y1="192" x2="416" y2="192" class="transition origin-center group-active:rotate-45"/>
+                        <line x1="32" y1="352" x2="416" y2="352" class="transition origin-center group-active:-rotate-45 group-active:-translate-x-28 group-active:-translate-y-28"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="navbar-image-1" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
+            <div class="flex flex-col gap-9 mt-5 pb-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
+                <MenuList page={currPage}/>
+            </div>
+        </div>
+    </nav>
+</header>
