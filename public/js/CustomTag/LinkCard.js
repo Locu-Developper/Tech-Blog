@@ -10,7 +10,7 @@ class LinkCard extends HTMLElement {
     static observedAttributes = ["url"];
 
     // 属性値が更新されたら呼び出されるコールバック。
-    attributeChangedCallback(newValue) {
+    attributeChangedCallback(name, oldValue, newValue) {
         this._innerText = newValue;
         this._updateRendering();
     }
@@ -56,22 +56,25 @@ class LinkCard extends HTMLElement {
                 })
 
                 let html =
-                    `<div class="p-2 border-2 rounded-2xl shadow">
-                        <div class="grid" style="grid-template-columns: 1.25fr 2.75fr">
-                            <div class="border rounded-l-lg" style="
+                    `<a href={url} class="no-underline">
+                        <div class="p-2 border-2 rounded-2xl shadow">
+                            <div class="grid" style="grid-template-columns: 1.25fr 2.75fr">
+                                <div class="border rounded-l-lg" style="
                                 height: 9rem;
                                 background-image: url('${metadata.image}');
                                 background-repeat: no-repeat;
                                 background-size: cover;
                                 background-position: center center;">
-                            </div>
-                            <div class="grid grid-rows-2 pl-2">
-                                <div class="truncate font-bold text-xl">${metadata.title}</div>
-                                <span class="truncate" style="font-size: 0.75rem">${url.replace(/(http:\/\/)?(https:\/\/)?/, "")}</span>
-                                <span class="line-clamp-3">${metadata.description ?? ''}</span>
+                                </div>
+                                <div class="grid grid-rows-2 pl-2">
+                                    <div class="truncate font-bold text-xl">${metadata.title}</div>
+                                    <span class="truncate"
+                                          style="font-size: 0.75rem">${url.replace(/(http:\/\/)?(https:\/\/)?/, "")}</span>
+                                    <span class="line-clamp-3 text-lg">${metadata.description ?? ''}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>`;
+                    </a>`;
 
                 this.insertAdjacentHTML(
                     'beforebegin', html);

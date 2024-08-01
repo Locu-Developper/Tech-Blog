@@ -122,10 +122,11 @@ let createdDate = new Date(property.createdAt).toLocaleDateString('sv-SE');
                 </div>
             </section>
 
+            <!--<div class="truncate line-clamp-3"></div>-->
 
             <!-- メイン -->
             <section>
-                <article set:html={ marked(content) } class="p-5"/>
+                <article set:html={ marked.parse(content) } class="p-5"/>
             </section>
 
             <!-- フッター(SNS・関連記事) -->
