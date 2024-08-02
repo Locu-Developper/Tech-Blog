@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="ja"> <head><meta charset="UTF-8"><meta name="description" content="詳細ページです"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/svg+xml" href="/favicon.png"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"><meta name="generator" content="Astro v4.12.2"><title>Docker + Laravelの開発環境を構築する - ロクの技術録</title><!-- head (gtag.js)--><script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script><script type="text/partytown">
+			window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-8NE58HGMZR");
+		</script><!-- more head --><script src="https://locu-blog.com/js/App.bundle.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1380118864277049" crossorigin="anonymous"></script><script src="/js/CustomTag/LinkCard.js"></script><link rel="stylesheet" href="/_astro/about.Bp-j2Fjy.css">
+<style>.border-anime[data-astro-cid-4sn4zg3r]{background-image:linear-gradient(120deg,#84fab0,#abbdf9 60%,#e2c1eb,#8fd3f4);background-size:200%;animation:border-gradient 20s infinite;//width: 100%;height:5px}@keyframes border-gradient{0%{background-position:0 40%}50%{background-position:100% 60%}to{background-position:0 40%}}
+</style><script>!(function(w,p,f,c){if(!window.crossOriginIsolated && !navigator.serviceWorker) return;c=w[p]=Object.assign(w[p]||{},{"lib":"/~partytown/","debug":false});c[f]=(c[f]||[]).concat(["dataLayer.push"])})(window,'partytown','forward');/* Partytown 0.10.2 - MIT builder.io */
+const t={preserveBehavior:!1},e=e=>{if("string"==typeof e)return[e,t];const[n,r=t]=e;return[n,{...t,...r}]},n=Object.freeze((t=>{const e=new Set;let n=[];do{Object.getOwnPropertyNames(n).forEach((t=>{"function"==typeof n[t]&&e.add(t)}))}while((n=Object.getPrototypeOf(n))!==Object.prototype);return Array.from(e)})());!function(t,r,o,i,a,s,c,d,l,p,u=t,f){function h(){f||(f=1,"/"==(c=(s.lib||"/~partytown/")+(s.debug?"debug/":""))[0]&&(l=r.querySelectorAll('script[type="text/partytown"]'),i!=t?i.dispatchEvent(new CustomEvent("pt1",{detail:t})):(d=setTimeout(v,1e4),r.addEventListener("pt0",w),a?y(1):o.serviceWorker?o.serviceWorker.register(c+(s.swPath||"partytown-sw.js"),{scope:c}).then((function(t){t.active?y():t.installing&&t.installing.addEventListener("statechange",(function(t){"activated"==t.target.state&&y()}))}),console.error):v())))}function y(e){p=r.createElement(e?"script":"iframe"),t._pttab=Date.now(),e||(p.style.display="block",p.style.width="0",p.style.height="0",p.style.border="0",p.style.visibility="hidden",p.setAttribute("aria-hidden",!0)),p.src=c+"partytown-"+(e?"atomics.js?v=0.10.2":"sandbox-sw.html?"+t._pttab),r.querySelector(s.sandboxParent||"body").appendChild(p)}function v(n,o){for(w(),i==t&&(s.forward||[]).map((function(n){const[r]=e(n);delete t[r.split(".")[0]]})),n=0;n<l.length;n++)(o=r.createElement("script")).innerHTML=l[n].innerHTML,o.nonce=s.nonce,r.head.appendChild(o);p&&p.parentNode.removeChild(p)}function w(){clearTimeout(d)}s=t.partytown||{},i==t&&(s.forward||[]).map((function(r){const[o,{preserveBehavior:i}]=e(r);u=t,o.split(".").map((function(e,r,o){var a;u=u[o[r]]=r+1<o.length?u[o[r]]||(a=o[r+1],n.includes(a)?[]:{}):(()=>{let e=null;if(i){const{methodOrProperty:n,thisObject:r}=((t,e)=>{let n=t;for(let t=0;t<e.length-1;t+=1)n=n[e[t]];return{thisObject:n,methodOrProperty:e.length>0?n[e[e.length-1]]:void 0}})(t,o);"function"==typeof n&&(e=(...t)=>n.apply(r,...t))}return function(){let n;return e&&(n=e(arguments)),(t._ptf=t._ptf||[]).push(o,arguments),n}})()}))})),"complete"==r.readyState?h():(t.addEventListener("DOMContentLoaded",h),t.addEventListener("load",h))}(window,document,navigator,top,window.crossOriginIsolated);;(e=>{e.addEventListener("astro:before-swap",e=>{let r=document.body.querySelector("iframe[src*='/~partytown/']");e.newDocument.body.append(r)})})(document);</script></head> <body class="bg"> <header class="mb-5 flex flex-wrap sm:justify-start sm:flex-nowrap w-full bg-white text-sm dark:bg-neutral-800 pt-2 md:pt-4 sticky top-0 shadow-2xl shadow-orange-100 z-50 mb-10 xl:mb-10"> <nav class="max-w-[85rem] w-full mx-auto px-10 sm:flex sm:items-end sm:justify-between" aria-label="Global"> <div class="flex items-center justify-between"> <a class="flex-none w-1/5 items-center" href="/"> <img src="/_astro/temp-logo.B3--L4AH_1VDkII.webp" alt="Logo" class="" width="600" height="500" loading="lazy" decoding="async"> </a> <div class="sm:hidden"> <button type="button" class="group border-none hs-collapse-toggle p-2 inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-neutral-700 dark:text-white dark:hover:bg-white/10" data-hs-collapse="#navbar-image-1" aria-controls="navbar-image-1" aria-label="Toggle navigation"> <svg width="40" height="40" viewBox="0 0 448 384" fill="none" xmlns="http://www.w3.org/2000/svg" class="stroke-black " stroke-linecap="round" stroke-width="64"> <line x1="32" y1="32" x2="416" y2="32" class="transition duration-75 origin-center group-active:translate-y-40"></line> <line x1="32" y1="192" x2="416" y2="192" class="transition origin-center group-active:rotate-45"></line> <line x1="32" y1="352" x2="416" y2="352" class="transition origin-center group-active:-rotate-45 group-active:-translate-x-28 group-active:-translate-y-28"></line> </svg> </button> </div> </div> <div id="navbar-image-1" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"> <div class="flex flex-col gap-9 mt-5 pb-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5"> <a class="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500" href="/" aria-current="page"> <p class="text-xl border-b-2 border-gray-500 sm:border-none pb-2 xl:pb-0">Home</p></a> <a class="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500" href="/blog"> <p class="text-xl border-b-2 border-gray-500 sm:border-none pb-2 xl:pb-0">Blog</p></a> <a class="font-medium text-gray-600 hover:text-gray-400 dark:text-neutral-400 dark:hover:text-neutral-500" href="/about"> <p class="text-xl border-b-2 border-gray-500 sm:border-none pb-2 xl:pb-0">About</p></a> <!--<a class={pageStyle[3]} href={pageUrl[3]}>--> <!--    <p class="text-xl border-b-2 border-gray-500 sm:border-none pb-2 xl:pb-0">{pageName[3]}</p></a>--> </div> </div> </nav> </header> <main class="w-[70%] xl:mb-10 w-[95%] lg:w-4/5">   <div class="prose bg-white p-4 rounded-2xl shadow-2xl mx-auto max-w-full lg:w-2/3" data-astro-cid-4sn4zg3r> <article class="pb-20" data-astro-cid-4sn4zg3r> <!-- ヘッダー --> <section class="px-5" data-astro-cid-4sn4zg3r> <div class="text-center" data-astro-cid-4sn4zg3r><span data-astro-cid-4sn4zg3r><img src=https://mta.locu-blog.com/blog/img/laravel-icon.svg alt="icon" class="w-[30%] lg:w-[10%] m-auto mb-2"></span></div> <div class="hidden md:block text-center" data-astro-cid-4sn4zg3r> <h1 class="mb-3" data-astro-cid-4sn4zg3r>Docker + Laravelの開発環境を構築する</h1> </div> <div class="md:hidden text-center font-bold" data-astro-cid-4sn4zg3r> <span class="text-3xl mb-3" data-astro-cid-4sn4zg3r>Docker + Laravelの開発環境を構築する</span> </div> <div class="border-anime rounded-full" data-astro-cid-4sn4zg3r></div> <!--<img src={article.image} alt={article.description} class="w-[80%] m-auto rounded-2xl shadow-2xl"/>--> <section class="flex justify-end mx-4 my-2 space-x-5" data-astro-cid-4sn4zg3r> <time datetime="2024-07-31" data-astro-cid-4sn4zg3r> <i class="fa-solid fa-pencil" data-astro-cid-4sn4zg3r></i> 2024-07-31 </time> <time datetime="2024-08-02" data-astro-cid-4sn4zg3r> <i class="fa-solid fa-rotate" data-astro-cid-4sn4zg3r></i> 2024-08-02 </time> </section> <div class="flex space-x-2 mb-3" data-astro-cid-4sn4zg3r> <i class="fa-solid fa-list fa-lg content-center" data-astro-cid-4sn4zg3r></i> <div class="h-fit" data-astro-cid-4sn4zg3r> <a href="/blog/category/Web関係" class="border border-blue-500 text-sm px-3 py-0.5 no-underline rounded-md" data-astro-cid-4sn4zg3r> Web関係 </a> </div> </div> <div class="flex space-x-2" data-astro-cid-4sn4zg3r> <i class="fa-solid fa-tag fa-lg content-center" data-astro-cid-4sn4zg3r></i> <div class="flex h-fit space-x-1.5" data-astro-cid-4sn4zg3r> <a href="/blog/tags/Docker" class="border border-blue-500 text-sm px-3 py-0.5 no-underline rounded-md" data-astro-cid-4sn4zg3r> Docker </a><a href="/blog/tags/Laravel" class="border border-blue-500 text-sm px-3 py-0.5 no-underline rounded-md" data-astro-cid-4sn4zg3r> Laravel </a> </div> </div> </section> <!--<div class="truncate line-clamp-3"></div>--> <!-- メイン --> <section data-astro-cid-4sn4zg3r> <article class="p-5" data-astro-cid-4sn4zg3r><h1>参考</h1>
+<p><link-card url="https://simablog.net/docker-laravel-nginx-mysql/"/></link-card></p>
+<h1>開発環境</h1>
+<ul>
+<li>windows 11</li>
+<li>Docker for Desktop</li>
+</ul>
+<h1>手順</h1>
+<h2>Docker for Desktopをインストール</h2>
+<p><link-card url="https://www.docker.com/ja-jp/products/docker-desktop/"/></link-card></p>
+<h2>ツリー構造を作成</h2>
+<pre><code class="language-text">&lt;ProjectFolder&gt;
+    └ docker-config
+    　 ├ mysql
+    　 │ └ my.conf
+    　 ├ nginx
+    　 │ ├ Dockerfile
+    　 │ └ default.conf
+    　 └ php
+    　 　 ├ Dockerfile
+    　 　 └ php.ini
+</code></pre>
+<h2>Dockerfile等の設定を記述する</h2>
+<h3>/docker-config/mysql/my.conf</h3>
+<pre><code class="language-docker"># MySQLサーバーへの設定
+[mysqld]
+character-set-server = utf8mb4
+collation-server = utf8mb4_bin
+
+# タイムゾーン
+default-time-zone = SYSTEM
+log_timestamps = SYSTEM
+
+# mysql8.0用に認証変更
+default-authentication-plugin = mysql_native_password
+
+
+# エラーログの設定
+# log-error = /var/log/mysql/mysql-error.log
+
+# スロークエリログ
+slow_query_log = 1
+slow_query_log_file = /var/log/mysql/mysql-slow.log
+long_query_time = 5.0
+log_queries_not_using_indexes = 0
+
+# 実行ログ
+general_log = 1
+general_log_file = /var/log/mysql/mysql-query.log
+
+# mysqlオプションの設定
+[mysql]
+default-character-set = utf8mb4
+
+# mysqlクライアントツールの設定
+[client]
+default-character-set = utf8mb4
+</code></pre>
+<h3>/docker-config/nginx/default.conf</h3>
+<pre><code class="language-docker">server {
+    index index.php index.html;
+    # ルートパスを設定
+    root /var/www/laravel/public;
+
+    location / {
+      # ルートパスを設定
+      root /var/www/laravel/public;
+      try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass web:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+}
+</code></pre>
+<h3>/docker-config/nginx/Dockerfile</h3>
+<pre><code class="language-docker">FROM alpine:3.6
+
+# nginxのインストール
+RUN apk update &amp;&amp; \
+    apk add --no-cache nginx
+RUN mkdir -p /run/nginx
+# RUN apk add openssl
+# ADD ssl /etc/nginx/ssl
+
+# フォアグラウンド
+CMD nginx -g &quot;daemon off;&quot;
+</code></pre>
+<h3>/docker-config/php/Dockerfile</h3>
+<pre><code class="language-docker">#バージョン指定
+FROM php:7.2-fpm
+# php.ini を /usr/local/etc/php/ にコピー
+COPY php.ini /usr/local/etc/php/
+
+# Composer をインストール
+RUN cd /usr/bin &amp;&amp; curl -s http://getcomposer.org/installer | php &amp;&amp; ln -s /usr/bin/composer.phar /usr/bin/composer
+
+# パッケージ群をインストール
+RUN apt-get update \
+  &amp;&amp; apt-get install -y \
+    gcc \
+    make \
+    libpng-dev \
+    git \
+    unzip \
+    vim \
+    libmcrypt-dev \
+    mariadb-client \
+    curl \
+    gnupg \
+    openssl \
+    zlib1g-dev \ 
+    &amp;&amp; docker-php-ext-install pdo_mysql mysqli mbstring zip
+
+# NPM・Node.jsをインストール
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+RUN apt-get install -y nodejs
+
+# xdebug をインストールxdebug
+RUN pecl install xdebug-2.7.2 &amp;&amp; docker-php-ext-enable xdebug
+
+# カレントディレクトリを /var/www に設定
+WORKDIR /var/www
+ADD . /var/www
+RUN chown -R www-data:www-data /var/www
+</code></pre>
+<h3>/docker-config/php/php.ini</h3>
+<pre><code class="language-docker">[Date]
+date.timezone = &quot;Asia/Tokyo&quot;
+[mbstring]
+mbstring.internal_encoding = &quot;UTF-8&quot;
+mbstring.language = &quot;Japanese&quot;
+[xdebug]
+xdebug.remote_enable = On
+xdebug.remote_port = 9001
+xdebug.remote_autostart = On
+xdebug.remote_host = 192.168.99.1
+xdebug.profiler_output_dir = &quot;/tmp&quot;
+xdebug.max_nesting_level= 1000
+xdebug.idekey = &quot;PHPSTORM&quot;
+</code></pre>
+<h3>/docker-compose.yml</h3>
+<pre><code class="language-yaml">version: &#39;3&#39; 
+
+services:
+    
+  web: 
+    build: ./docker-config/php
+    container_name: app_php
+    volumes:
+      - ./laravel:/var/www/laravel
+    working_dir: /var/www/laravel
+    depends_on:
+      - mysql
+
+  nginx:
+    image: nginx
+    container_name: app_nginx
+    build: ./docker-config/nginx
+    ports:
+      - &quot;81:80&quot;
+    volumes:
+      - .:/var/www
+      - ./docker-config/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - web
+
+  mysql:
+    image: mysql:8.0
+    container_name: app_db
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: development
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: m_user
+      MYSQL_PASSWORD: m_user
+      TZ: &#39;Asia/Tokyo&#39;
+      
+    volumes:
+      - ./docker-config/mysql/data:/var/lib/mysql
+      - ./docker-config/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+
+    depends_on:
+      - mysql-volume
+
+  mysql-volume:
+    image: busybox
+    volumes:
+      - ./docker-config/mysql/data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: app_pma
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    links:
+      - mysql
+    ports:
+      - 8080:80
+    volumes:
+      - /sessions
+</code></pre>
+<h2>Docker Composeでコンテナを立ち上げる</h2>
+<pre><code class="language-shell">docker-compose up -d --build
+</code></pre>
+<h3>オプション説明</h3>
+<table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>docker-compose</td>
+<td>Docker Compose のバイナリです。このコマンドを使い Docker コンテナ上の複数のサービスを管理します。</td>
+</tr>
+<tr>
+<td>up</td>
+<td>コンテナの作成と起動</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>デタッチド・モード: バックグラウンドでコンテナを実行し、新しいコンテナ名を表示</td>
+</tr>
+<tr>
+<td>- -build</td>
+<td>コンテナを開始前にイメージを構築する</td>
+</tr>
+</tbody></table>
+<h3>トラブルシューティング</h3>
+<details>
+<summary>An attempt was made to access a socket in a way forbidden by its access permissions</summary>
+
+<pre><code class="language-shell">Error response from daemon: Ports are not available: exposing port TCP 0.0.0.0:80 -&gt; 0.0.0.0:0: listen tcp 0.0.0.0:80: bind: An attempt was made to access a socket in a way forbidden by its access permissions.
+</code></pre>
+<p>こんなエラーが出た場合、ポートが別のプロセスによって使われている可能性が高い為、そのプロセスをキルするか、別ポート(httpなら 80 ⇒ 81・82 )に変更することをお勧めする</p>
+</details>
+
+
+<h2>Laravelプロジェクトをインストール</h2>
+<h3>コンテナのコンソールに接続</h3>
+<pre><code class="language-shell">docker exec -it app_php bash
+</code></pre>
+<h3>Laravelプロジェクトをインストール</h3>
+<pre><code class="language-shell">composer create-project &quot;laravel/laravel&quot;
+</code></pre>
+</article> </section> <!-- フッター(SNS・関連記事) --> <section data-astro-cid-4sn4zg3r> <!--<div class="mt-3 sm:mt-5 flex justify-around w-full m-auto text-center pb-2 sm:pb-10">--><!--    <a href="" class="bg-red-400 bg-opacity-20 border-2 border-red-500 py-1 rounded w-1/5 no-underline sm:space-x-1">--><!--        <i class="fa-brands fa-youtube fa-xl text-red-600"></i>--><!--        <span class="font-bold">YouTube</span>--><!--    </a>--><!--    <a href="" class="bg-cyan-400 bg-opacity-30 border-2 border-blue-400 py-1 rounded w-1/5 no-underline space-x-1">--><!--        <i class="fa-brands fa-twitter fa-xl text-blue-600"></i>--><!--        <span class="font-bold">Twitter (X)</span>--><!--    </a>--><!--    <a href="" class="border-2 border-black py-1 rounded w-1/5 no-underline space-x-1">--><!--        <i class="fa-brands fa-github fa-xl"></i>--><!--        <span class="font-bold">GitHub</span>--><!--    </a>--><!--</div>--><div class="flex justify-around mt-6 sm:mt-10 mb-2"> <a href="https://www.youtube.com/channel/UCMWF2ae7MUGqRjw7f9WbBdw" class="bg-red-400 bg-opacity-20 border-2 border-red-500 pt-5 p-2 flex flex-col space-y-3 w-24 rounded shadow-lg no-underline text-center"> <i class="fa-brands fa-youtube fa-xl text-red-600"></i> <span class="sm:font-bold">YouTube</span> </a> <a href="https://x.com/Locu______6" class="bg-cyan-400 bg-opacity-30 border-2 border-blue-400 pt-5 p-2 flex flex-col space-y-3 w-24 rounded shadow-lg no-underline text-center"> <i class="fa-brands fa-twitter fa-xl text-blue-600"></i> <span class="sm:font-bold">Twitter(X)</span> </a> <a href="https://github.com/Locu-Developper" class="border-2 border-black pt-5 p-2 flex flex-col space-y-3 w-24 rounded shadow-lg no-underline text-center"> <i class="fa-brands fa-github fa-xl"></i> <span class="sm:font-bold">GitHub</span> </a> </div> </section> </article> </div>  </main> <footer class="w-fit fixed bottom-0 bg-white rounded-t-2xl dark:bg-gray-800 shadow sm:rounded-t-lg sm:ml-4 xl:ml-32"> <div class="w-full mx-auto max-w-screen-xl p-2 md:flex md:items-center md:justify-between"> <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+© 2024 Locu All Rights Reserved.
+</span> </div> </footer> </body></html>

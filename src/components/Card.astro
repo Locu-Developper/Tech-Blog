@@ -15,9 +15,7 @@ const {prop, propV = '', limit = 0} = Astro.props;
 let posts = await getPostProperty(prop, propV);
 
 if(limit !== 0){
-    console.log(posts)
     posts = posts.slice(0,limit);
-    console.log(posts)
 }
 
 ---

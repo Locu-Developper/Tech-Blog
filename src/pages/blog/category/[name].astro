@@ -1,5 +1,6 @@
 
 ---
+export const prerender = true;
 import {getPostProperty, postQueryProperty} from "../../../libs/Notion/NotionApi";
 import {IPageProperty} from "../../../libs/Notion/PageProperty";
 import Layout from "../../../layouts/Layout.astro";
@@ -22,7 +23,6 @@ export const getStaticPaths = async () => {
         params: {name: c}
     }))
 }
-console.log(Astro)
 const name = Astro.params['name'] ?? '';
 ---
 

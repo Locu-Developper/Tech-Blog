@@ -1,10 +1,12 @@
 ---
+export const prerender = true;
 import Layout from "../../layouts/Layout.astro";
 import SnsLink from "../../components/SnsLink.astro";
 import {marked} from "marked";
 import {getPage} from "../../libs/Notion/NotionApi";
 import {IPageProperty} from "../../libs/Notion/PageProperty";
 import {iconJudge} from "../../libs/Notion/IconJudge";
+import proxy from "../proxy.json";
 
 interface Props {
     property: IPageProperty;
@@ -30,20 +32,6 @@ let title = property.title;
 let updatedDate = new Date(property.updatedAt).toLocaleDateString('sv-SE');
 let createdDate = new Date(property.createdAt).toLocaleDateString('sv-SE');
 
-/*
-　|￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣
-　|
-　|
-　|  なにみてんだコラ
-　|  (フォントが違うからずれるなぁ)
-　|
-　|＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
-　 ＿＿_∧∧　 ／
-／＼ 　(,,ﾟДﾟ)つ
-＼／|￣∪￣￣|＼
-　 ＼|花見弁当|
-　 　　￣￣￣￣
-*/
 ---
 
 
